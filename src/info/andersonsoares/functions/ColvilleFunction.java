@@ -4,7 +4,7 @@ import java.util.List;
 
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 
-public class ColvileFunction implements FunctionInterface {
+public class ColvilleFunction implements FunctionInterface {
 
 	
 	/*
@@ -23,23 +23,24 @@ public class ColvileFunction implements FunctionInterface {
         double x3 = variables.get(2);
         double x4 = variables.get(3);
 
+
         /*
          * 100(x2 - (x1^2))^2 + (1 - (x1^2))^2 + 90(x4 - (x3^2))^2 + 10,1((x2-1)^2 + (x4-1)^2) + 19.8(x2 - 1)(x4 - 1)
          */
         
-        result = (100 * (x2 - (x1 * x1)) * (x2 - (x1 * x1))) 
+        result = 100 * (x2 - (x1*x1)) * (x2 - (x1*x1))  
         		+ 
-        		((1 - x1)*(1 - x1))
+        		( (1 - x1) * (1 - x1) )  
         		+
-        		(90 * (x4 - (x3 * x3) * (x4 - (x3 * x3))))
+        		90 * (x4 - (x3*x3)) * (x4 - (x3*x3) )
         		+
-        		(1 - x3)*(1 - x3)
+        		(1 - x3) * (1 - x3) 
         		+
-        		(10.1 * (((x2 - 1) * (x2 - 1)) + ((x4 - 1) * (x4 - 1))))
+        		10.1*( (x2 - 1)*(x2 - 1) + (x4-1)*(x4-1) ) 
         		+
-        		(19.8 * (x2 - 1) * (x4 - 1))
-        		
+        		19.8*(x2-1)*(x4-1)
         		;
+
 
         result *= (-1);
         return result;
