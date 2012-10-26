@@ -1,6 +1,8 @@
 package info.andersonsoares.model;
 
 
+import info.andersonsoares.util.PrintArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,13 @@ public class Chromosome
             chromosome.add(Math.round(Math.random()) == 0);
     }
 
-    public int size()
+   
+    
+    public Chromosome(List<Boolean> bits) {
+    	this.chromosome = bits;
+	}
+
+	public int size()
     {
         return chromosome.size();
     }
@@ -46,7 +54,7 @@ public class Chromosome
 
     public void flip(int index)
     {
-        chromosome.set(index, ! chromosome.get(index));
+    	chromosome.set(index, ! chromosome.get(index));
     }
 
     public int hammingDistanceTo(Chromosome otherChromosome)

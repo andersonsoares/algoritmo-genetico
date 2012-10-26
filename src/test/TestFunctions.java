@@ -14,7 +14,7 @@ public class TestFunctions {
 	
 	public static void main(String[] args) {
 		Chromosome c = null;
-		FourRealDecoder four = new FourRealDecoder(5,2);
+		FourRealDecoder four = new FourRealDecoder(5);
 		
 		ColvilleFunction cf = new ColvilleFunction();
 		
@@ -24,7 +24,8 @@ public class TestFunctions {
 			c = new Chromosome(36);
 //			System.out.println(four.decode(c));
 //			array.add(cf.calculate(four.decode(c)));
-			array.add(cf.calculate(Arrays.asList(9d,9d,9d,9d)));
+			//-2,880000 -10,080000 -4,800000 7,750000
+			array.add(cf.calculate(Arrays.asList(1d,1d,1d,1d)));
 			i++;
 		}
 		

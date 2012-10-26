@@ -8,8 +8,8 @@ import info.andersonsoares.model.Chromosome;
 
 public class FourRealDecoder extends Decoder {
 
-	public FourRealDecoder(Integer decimalPlaces, Integer baseNumber) {
-		super(decimalPlaces, baseNumber);
+	public FourRealDecoder(Integer decimalPlaces) {
+		super(decimalPlaces);
 	}
 
 	public List<Double> decode(Chromosome chromosome) {
@@ -38,19 +38,19 @@ public class FourRealDecoder extends Decoder {
          * negative (true).
          */
         base = 1;
-        for (int i = splitIndex - 1; i >= 1; base *= baseNumber)
+        for (int i = splitIndex - 1; i >= 1; base *= 2)
             valueA += chromosome.get(i--) ? base : 0;
 
         base = 1;
-        for (int i = (splitIndex * 2) - 1; i >= splitIndex + 1; base *= baseNumber)
+        for (int i = (splitIndex * 2) - 1; i >= splitIndex + 1; base *= 2)
             valueB += chromosome.get(i--) ? base : 0;
 
         base = 1;
-        for (int i = chromosome.size() - 1; i >= (splitIndex * 2) + 1; base *= baseNumber)
-            valueC += chromosome.get(i--) ? base : 0;
-        
+        for (int i = (splitIndex * 3) - 1; i >= (splitIndex * 2) + 1; base *= 2)
+        	valueC += chromosome.get(i--) ? base: 0;
+//        
         base = 1;
-        for (int i = chromosome.size() - 1; i >= (splitIndex * 3) + 1; base *= baseNumber)
+        for (int i = chromosome.size() - 1; i >= (splitIndex * 3) + 1; base *= 2)
             valueD += chromosome.get(i--) ? base : 0;
 
         /*
