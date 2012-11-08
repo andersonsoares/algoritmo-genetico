@@ -5,7 +5,7 @@ import info.andersonsoares.algorithm.ga.interfaces.AbstractGA;
 import info.andersonsoares.algorithm.mutation.chromosome.RandomBitFlipMutation;
 import info.andersonsoares.algorithm.recombination.SinglePointCrossover;
 import info.andersonsoares.algorithm.selection.parent.RouletteParentSelection;
-import info.andersonsoares.algorithm.selection.survivor.RoletaSurvivorSelection;
+import info.andersonsoares.algorithm.selection.survivor.Roleta;
 import info.andersonsoares.functions.ColvilleFunction;
 import info.andersonsoares.functions.DeJongF1Function;
 import info.andersonsoares.functions.DeJongF2Function;
@@ -26,7 +26,8 @@ public class GenericAlgorithm extends AbstractGA
         algPS = new RouletteParentSelection(d, f);
 //        algPS = new RandomParentSelection();
 //        algSS = new TournamentSurvivorSelection(d, f);
-        algSS = new RoletaSurvivorSelection(d, f);
+//        algSS = new RoletaSurvivorSelection(d, f);
+        algSS = new Roleta(d, f);
 //        algSS = new RankingSurvivorSelection(d, f);
         algRec = new SinglePointCrossover();
         algMutC = new RandomBitFlipMutation();

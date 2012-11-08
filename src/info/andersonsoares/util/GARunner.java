@@ -8,7 +8,6 @@ import info.andersonsoares.functions.ColvilleFunction;
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class GARunner {
 
@@ -21,11 +20,11 @@ public class GARunner {
 		
 		int nrExecucoes = 10;
 		
-//		while(i < nrExecucoes) {
-			int populationSize = 5;
+		while(i < nrExecucoes) {
+			int populationSize = 50;
 			double pC = 0.7; // probability Crossover
 			double pM = 0.01; // probability Mutation
-			int termGeneration = 10;
+			int termGeneration = 10000;
 			double termFitness = 0;
 			
 			//Run DeJongF1
@@ -34,9 +33,9 @@ public class GARunner {
 	//		int chromosomeSize = 30;
 	
 			//Run DeJongF2
-	//		FunctionInterface function = new DeJongF2Function();
-	//		TwoRealDecoder decoder = new TwoRealDecoder(3);
-	//		int chromosomeSize = 24;
+//			FunctionInterface function = new DeJongF2Function();
+//			TwoRealDecoder decoder = new TwoRealDecoder(3);
+//			int chromosomeSize = 24;
 			
 	//		//Run Colvillie Function test
 			FunctionInterface function = new ColvilleFunction();
@@ -67,13 +66,13 @@ public class GARunner {
 			System.out.println(melhorResultado);
 			mediaMelhorResultado+=melhorResultado;
 			i++;
-//		}//fim while
+		}//fim while
 		
-//		mediaMelhorResultado /= nrExecucoes;
-//		mediaTempoDecorrido  /= nrExecucoes;
-//		
-//		System.out.println("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido));
-//		System.out.println("Media de resultado: "+mediaMelhorResultado);
+		mediaMelhorResultado /= nrExecucoes;
+		mediaTempoDecorrido  /= nrExecucoes;
+		
+		System.out.println("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido));
+		System.out.println("Media de resultado: "+mediaMelhorResultado);
 	}//fim main	
 
 	private static double getBestResult(List<Double> bestFitnesses) {
