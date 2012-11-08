@@ -4,6 +4,7 @@ package info.andersonsoares.algorithm.selection.survivor;
 import info.andersonsoares.decoders.interfaces.Decoder;
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 import info.andersonsoares.model.Chromosome;
+import info.andersonsoares.util.PopulationAnalyzer;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +31,11 @@ public class RankingSurvivorSelection implements SurvivorSelection
     public List<Chromosome> select(List<Chromosome> population,
             int targetPopulationSize)
     {
+    	
+    	List<Chromosome> survivors = new LinkedList<Chromosome>();
+		System.out.println("Populacao Inicial");
+		PopulationAnalyzer.print(population, d, f);
+    	
         if (targetPopulationSize > population.size())
             throw new IllegalArgumentException(
                     "targetPopulationSize > populationSize");
@@ -55,7 +61,7 @@ public class RankingSurvivorSelection implements SurvivorSelection
         /*
          * Sorted to ascending order, so iterate backward.
          */
-        List<Chromosome> survivors = new LinkedList<Chromosome>();
+
         for (int i = fitnesses.length - 1; i >= 0; i -= 1)
         {
             if (survivors.size() + fitnessMap.get(fitnesses[i]).size()
@@ -71,6 +77,8 @@ public class RankingSurvivorSelection implements SurvivorSelection
             }
         }
 
+        System.out.println("Populacao sobrevivente");
+		PopulationAnalyzer.print(survivors, d, f);
         return survivors;
     }
 }

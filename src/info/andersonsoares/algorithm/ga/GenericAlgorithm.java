@@ -5,7 +5,7 @@ import info.andersonsoares.algorithm.ga.interfaces.AbstractGA;
 import info.andersonsoares.algorithm.mutation.chromosome.RandomBitFlipMutation;
 import info.andersonsoares.algorithm.recombination.SinglePointCrossover;
 import info.andersonsoares.algorithm.selection.parent.RouletteParentSelection;
-import info.andersonsoares.algorithm.selection.survivor.RankingSurvivorSelection;
+import info.andersonsoares.algorithm.selection.survivor.RoletaSurvivorSelection;
 import info.andersonsoares.functions.ColvilleFunction;
 import info.andersonsoares.functions.DeJongF1Function;
 import info.andersonsoares.functions.DeJongF2Function;
@@ -26,7 +26,8 @@ public class GenericAlgorithm extends AbstractGA
         algPS = new RouletteParentSelection(d, f);
 //        algPS = new RandomParentSelection();
 //        algSS = new TournamentSurvivorSelection(d, f);
-        algSS = new RankingSurvivorSelection(d, f);
+        algSS = new RoletaSurvivorSelection(d, f);
+//        algSS = new RankingSurvivorSelection(d, f);
         algRec = new SinglePointCrossover();
         algMutC = new RandomBitFlipMutation();
     }
@@ -94,7 +95,7 @@ public class GenericAlgorithm extends AbstractGA
         System.out.println("Populacao criada!");
         System.out.println("---Populacao Inicial---");
         /* ---  FINALIZANDO CRIACAO DA POPULACAO ------ */
-        PopulationAnalyzer.print(population, d, f);
+//        PopulationAnalyzer.print(population, d, f);
         Double gBest  = null;
         Double gWorst = null;
         double bestValue = 1000000.0;

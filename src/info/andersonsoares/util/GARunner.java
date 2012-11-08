@@ -7,6 +7,7 @@ import info.andersonsoares.decoders.interfaces.Decoder;
 import info.andersonsoares.functions.ColvilleFunction;
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class GARunner {
@@ -18,11 +19,13 @@ public class GARunner {
 		double mediaMelhorResultado = 0;
 		long mediaTempoDecorrido = 0;
 		
-		while(i < 10) {
-			int populationSize = 50;
+		int nrExecucoes = 10;
+		
+//		while(i < nrExecucoes) {
+			int populationSize = 5;
 			double pC = 0.7; // probability Crossover
-			double pM = 0.1; // probability Mutation
-			int termGeneration = 10000;
+			double pM = 0.01; // probability Mutation
+			int termGeneration = 10;
 			double termFitness = 0;
 			
 			//Run DeJongF1
@@ -58,10 +61,32 @@ public class GARunner {
 			long tempoDecorrido = fim - inicio;
 			
 			mediaTempoDecorrido+=tempoDecorrido;
-			
-			
 			System.out.println(ImprimirTempo.print(tempoDecorrido));
+			
+			double melhorResultado = getBestResult(results.bestFitnesses);
+			System.out.println(melhorResultado);
+			mediaMelhorResultado+=melhorResultado;
 			i++;
-		}//fim while
+//		}//fim while
+		
+//		mediaMelhorResultado /= nrExecucoes;
+//		mediaTempoDecorrido  /= nrExecucoes;
+//		
+//		System.out.println("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido));
+//		System.out.println("Media de resultado: "+mediaMelhorResultado);
 	}//fim main	
+
+	private static double getBestResult(List<Double> bestFitnesses) {
+		
+		Double best = null;
+		
+		for (Double result : bestFitnesses) {
+			if (best != null) {
+				best = Math.abs(result) < Math.abs(best) ? result : best;
+			} else {
+        	   best = result;
+			}
+		}
+		return best;
+	}
 }

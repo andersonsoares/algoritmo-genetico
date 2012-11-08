@@ -5,6 +5,7 @@ import info.andersonsoares.decoders.interfaces.Decoder;
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 import info.andersonsoares.model.Chromosome;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PopulationAnalyzer
@@ -63,6 +64,7 @@ public class PopulationAnalyzer
         return best;
     }
 
+    
     public static double worstFitness(List<Chromosome> population,
             Decoder d, FunctionInterface f)
     {
@@ -85,4 +87,5 @@ public class PopulationAnalyzer
 
         return worst;
     }
+    
 }
