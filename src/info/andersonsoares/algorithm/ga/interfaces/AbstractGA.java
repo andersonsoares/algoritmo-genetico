@@ -1,7 +1,6 @@
 package info.andersonsoares.algorithm.ga.interfaces;
 
 import info.andersonsoares.algorithm.mutation.chromosome.ChromosomeMutation;
-import info.andersonsoares.algorithm.mutation.population.PopulationMutation;
 import info.andersonsoares.algorithm.recombination.Recombination;
 import info.andersonsoares.algorithm.selection.parent.ParentSelection;
 import info.andersonsoares.algorithm.selection.survivor.SurvivorSelection;
@@ -20,7 +19,7 @@ public abstract class AbstractGA implements GA {
     protected ParentSelection       algPS;
     protected Recombination         algRec;
     protected ChromosomeMutation    algMutC;
-    protected PopulationMutation    algMutP;
+    
 
     public void setDecoder(Decoder d)   { this.d = d; }
     public void setFunction(FunctionInterface f) { this.f = f; }
@@ -78,9 +77,6 @@ public abstract class AbstractGA implements GA {
         return algMutC.mutate(chromosome, pM);
     }
 
-    protected List<Chromosome> mutate(List<Chromosome> population, double pM)
-    {
-        return algMutP.mutate(population, pM);
-    }
+    
     
 }

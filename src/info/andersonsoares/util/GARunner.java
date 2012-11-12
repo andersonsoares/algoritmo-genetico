@@ -2,9 +2,9 @@ package info.andersonsoares.util;
 
 import info.andersonsoares.algorithm.ga.GenericAlgorithm;
 import info.andersonsoares.algorithm.ga.interfaces.GA;
-import info.andersonsoares.decoders.FourRealDecoder;
-import info.andersonsoares.decoders.interfaces.Decoder;
-import info.andersonsoares.functions.ColvilleFunction;
+import info.andersonsoares.algorithm.selection.survivor.Roleta;
+import info.andersonsoares.decoders.ThreeRealDecoder;
+import info.andersonsoares.functions.DeJongF1Function;
 import info.andersonsoares.functions.interfaces.FunctionInterface;
 
 import java.util.List;
@@ -25,12 +25,12 @@ public class GARunner {
 			double pC = 0.7; // probability Crossover
 			double pM = 0.01; // probability Mutation
 			int termGeneration = 10000;
-			double termFitness = 0;
+			double termFitness = 0.01;
 			
 			//Run DeJongF1
-	//		FunctionInterface function = new DeJongF1Function();
-	//		ThreeRealDecoder decoder = new ThreeRealDecoder(2);
-	//		int chromosomeSize = 30;
+			FunctionInterface function = new DeJongF1Function();
+			ThreeRealDecoder decoder = new ThreeRealDecoder(2);
+			int chromosomeSize = 30;
 	
 			//Run DeJongF2
 //			FunctionInterface function = new DeJongF2Function();
@@ -38,9 +38,9 @@ public class GARunner {
 //			int chromosomeSize = 24;
 			
 	//		//Run Colvillie Function test
-			FunctionInterface function = new ColvilleFunction();
-			Decoder decoder = new FourRealDecoder(2);
-			int chromosomeSize = 44;
+//			FunctionInterface function = new ColvilleFunction();
+//			Decoder decoder = new FourRealDecoder(2);
+//			int chromosomeSize = 44;
 			
 	
 			
@@ -50,6 +50,7 @@ public class GARunner {
 			GA ga = new GenericAlgorithm();
 			ga.setDecoder(decoder);
 			ga.setFunction(function);
+			ga.setSurvivorSelector(new Roleta(decoder,function));
 			ga.init();
 			
 			long inicio = System.currentTimeMillis();

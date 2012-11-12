@@ -38,15 +38,21 @@ public class RouletteParentSelection implements ParentSelection
             absoluteFitnesses.add(fitness);
         }
 
-        if (totalFitness == 0)
-            throw new ArithmeticException(""
-                + "Sum fitness is zero in RouletteParentSelection, "
-                + "so cannot determine proportional fitness.");
+        List<Chromosome> parents = new LinkedList<Chromosome>();
+        
+        if (totalFitness == 0) {
+//            throw new ArithmeticException(""
+//                + "Sum fitness is zero in RouletteParentSelection, "
+//                + "so cannot determine proportional fitness.");
+        	parents.add(population.get(0));
+        	parents.add(population.get(1));
+        	return parents;
+        }
 
         for (Double i : absoluteFitnesses)
             proportionalFitnesses.add(i / totalFitness);
 
-        List<Chromosome> parents = new LinkedList<Chromosome>();
+        
 
         while (parents.size() < 2)
         {

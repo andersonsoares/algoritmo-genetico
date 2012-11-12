@@ -13,7 +13,7 @@ public class PopulationAnalyzer
     public static void print(List<Chromosome> population,
             Decoder d, FunctionInterface f)
     {
-        System.out.println("CROMOSSOMO\t\tVALORES DECODIFICADOS\t\tF(X)");
+        Run.log("CROMOSSOMO\t\tVALORES DECODIFICADOS\t\tF(X)");
 
         for (Chromosome i : population)
         {
@@ -25,7 +25,7 @@ public class PopulationAnalyzer
                 sb.append(String.format("%f ", j));
             sb.append("}");
 
-            System.out.println(String.format("%s\t%s\t%f",
+            Run.log(String.format("%s\t%s\t%f",
                         i.toString(), sb.toString(), f.calculate(vals)));
         }
     }

@@ -5,13 +5,16 @@ import info.andersonsoares.algorithm.ga.interfaces.AbstractGA;
 import info.andersonsoares.algorithm.mutation.chromosome.RandomBitFlipMutation;
 import info.andersonsoares.algorithm.recombination.SinglePointCrossover;
 import info.andersonsoares.algorithm.selection.parent.RouletteParentSelection;
-import info.andersonsoares.algorithm.selection.survivor.Roleta;
+import info.andersonsoares.algorithm.selection.survivor.Ranking;
+import info.andersonsoares.algorithm.selection.survivor.SurvivorSelection;
+import info.andersonsoares.algorithm.selection.survivor.TournamentRoleta;
 import info.andersonsoares.functions.ColvilleFunction;
 import info.andersonsoares.functions.DeJongF1Function;
 import info.andersonsoares.functions.DeJongF2Function;
 import info.andersonsoares.model.Chromosome;
 import info.andersonsoares.util.GAResultSet;
 import info.andersonsoares.util.PopulationAnalyzer;
+import info.andersonsoares.util.Run;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,8 +30,10 @@ public class GenericAlgorithm extends AbstractGA
 //        algPS = new RandomParentSelection();
 //        algSS = new TournamentSurvivorSelection(d, f);
 //        algSS = new RoletaSurvivorSelection(d, f);
-        algSS = new Roleta(d, f);
+//        algSS = new Roleta(d, f);
 //        algSS = new RankingSurvivorSelection(d, f);
+//        algSS = new Ranking(d, f);
+//        algSS = new TournamentRoleta(d, f);
         algRec = new SinglePointCrossover();
         algMutC = new RandomBitFlipMutation();
     }
@@ -52,7 +57,8 @@ public class GenericAlgorithm extends AbstractGA
         GAResultSet results = new GAResultSet();
 
         /* --- CRIANDO POPULACAO ------ */
-        System.out.println("Criando populucao...");
+        Run.log("Criando populacao inicial");
+//        System.out.println("Criando populucao...");
         List<Chromosome> population = new LinkedList<Chromosome>();
         
         int j=0;
@@ -93,22 +99,26 @@ public class GenericAlgorithm extends AbstractGA
             	j++;
         	}
         }
-        System.out.println("Populacao criada!");
-        System.out.println("---Populacao Inicial---");
+        Run.log("Populacao criada!");
+//        System.out.println("Populacao criada!");
+//        System.out.println("---Populacao Inicial---");
         /* ---  FINALIZANDO CRIACAO DA POPULACAO ------ */
-//        PopulationAnalyzer.print(population, d, f);
+        PopulationAnalyzer.print(population, d, f);
+        Run.log("==================");
         Double gBest  = null;
         Double gWorst = null;
         double bestValue = 1000000.0;
-        for (int i = 0; i <= termGeneration
-            && (gBest == null || gBest < termFitness); i += 1)
-        {
-            if (gBest == null)
+        int totalIterations=0;
+        for (int i = 0; i <= termGeneration; i += 1)  {
+        	totalIterations++;
+        	if (gBest == null)
                 gBest = PopulationAnalyzer.bestFitness(population, d, f);
-            else
+            else {
+            	if(Math.abs(gBest) <= termFitness)
+            		break;
                 if (gBest < PopulationAnalyzer.bestFitness(population, d, f))
                     gBest = PopulationAnalyzer.bestFitness(population, d, f);
-
+            }
             if (gWorst == null)
                 gWorst = PopulationAnalyzer.worstFitness(population, d, f);
             else
@@ -118,7 +128,9 @@ public class GenericAlgorithm extends AbstractGA
             
             if(Math.abs(bestValue) > Math.abs(gBest)) {
             	bestValue = gBest;
-            	System.out.println("[Iter. #"+i+"] Best result from now: "+bestValue);
+//            	System.out.println("[Iter. #"+i+"] Best result from now: "+bestValue);
+            	PopulationAnalyzer.print(population, d, f);
+            	Run.log("[Iter. #"+i+"] Melhor aptidao encontrada ate agora: "+bestValue);
             }
             results.bestFitnesses.add(gBest);
             results.avgFitnesses.add(PopulationAnalyzer
@@ -145,15 +157,26 @@ public class GenericAlgorithm extends AbstractGA
             newGeneration = getSurvivors(newGeneration, population.size());
             population = newGeneration;
 //            System.out.println("---------Nova populacao---------- ");
-//            PopulationAnalyzer.print(population, d, f);
+            Run.log("Nova geracao");
+            PopulationAnalyzer.print(population, d, f);
 //            System.out.println("Nr. Iteracoes: "+i);
         }
 
 //        System.out.println("---Populacao Final---");
         /* ---  FINALIZANDO CRIACAO DA POPULACAO ------ */
 //        PopulationAnalyzer.print(population, d, f);
-        System.out.println("Best Value last Population: "+gBest);
-        System.out.println("Fim");
+        
+//        System.out.println("Best Value last Population: "+gBest);
+        Run.log("Melhor aptidao encontrada da ultima geracao: "+gBest);
+        Run.log("Total iteracoes: "+totalIterations);
+        Run.log("--------------------------------------------");
+        
+//		System.out.println("Total iteracoes: "+totalIterations);
+//        System.out.println("Fim");
         return results;
     }
+
+	public void setSurvivorSelector(SurvivorSelection selector) {
+		algSS = selector; 
+	}
 }
