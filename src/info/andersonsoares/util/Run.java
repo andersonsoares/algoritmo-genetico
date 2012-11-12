@@ -32,6 +32,7 @@ public class Run {
 	public static void main(String[] args) {
 	
 		
+		System.out.println("Log completo em: "+file.getName());
 		
 		
 		//Run DeJongF1
@@ -104,8 +105,9 @@ public class Run {
 		
 		while(i < nrExecucoes) {
 			
-			System.out.println("Rodando algoritmo ["+i+"] de ["+nrExecucoes+"] vezes");
-			log("Rodando algoritmo ["+i+1+"] de ["+nrExecucoes+"] vezes");
+			int j=i+1;
+			System.out.println("Rodando algoritmo ["+j+"] de ["+nrExecucoes+"] vezes");
+			log("Rodando algoritmo ["+j+"] de ["+nrExecucoes+"] vezes");
 			
 			int populationSize = 50;
 			double pC = 0.7; // probability Crossover
@@ -148,8 +150,8 @@ public class Run {
 			
 			mediaTempoDecorrido+=tempoDecorrido;
 //			System.out.println(ImprimirTempo.print(tempoDecorrido));
-			log("Tempo decorrido: "+tempoDecorrido);
-			System.out.println("\tTempo decorrido: "+tempoDecorrido);
+			log("Tempo decorrido: "+ImprimirTempo.print(tempoDecorrido)+"( "+tempoDecorrido+" ms)");
+			System.out.println("\tTempo decorrido: "+ImprimirTempo.print(tempoDecorrido)+" ( "+tempoDecorrido+" ms )");
 			
 			double melhorResultado = getBestResult(results.bestFitnesses);
 //			System.out.println(melhorResultado);

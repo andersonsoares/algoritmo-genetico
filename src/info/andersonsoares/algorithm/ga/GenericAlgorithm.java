@@ -130,7 +130,7 @@ public class GenericAlgorithm extends AbstractGA
             	bestValue = gBest;
 //            	System.out.println("[Iter. #"+i+"] Best result from now: "+bestValue);
             	PopulationAnalyzer.print(population, d, f);
-            	Run.log("[Iter. #"+i+"] Melhor aptidao encontrada ate agora: "+bestValue);
+            	Run.log("[Iter. #"+i+"] Melhor aptidao encontrada ate agora: "+Math.abs(bestValue));
             }
             results.bestFitnesses.add(gBest);
             results.avgFitnesses.add(PopulationAnalyzer
@@ -157,8 +157,8 @@ public class GenericAlgorithm extends AbstractGA
             newGeneration = getSurvivors(newGeneration, population.size());
             population = newGeneration;
 //            System.out.println("---------Nova populacao---------- ");
-            Run.log("Nova geracao");
-            PopulationAnalyzer.print(population, d, f);
+//            Run.log("Nova geracao");
+//            PopulationAnalyzer.print(population, d, f);
 //            System.out.println("Nr. Iteracoes: "+i);
         }
 
@@ -167,7 +167,7 @@ public class GenericAlgorithm extends AbstractGA
 //        PopulationAnalyzer.print(population, d, f);
         
 //        System.out.println("Best Value last Population: "+gBest);
-        Run.log("Melhor aptidao encontrada da ultima geracao: "+gBest);
+        Run.log("Melhor aptidao encontrada da ultima geracao: "+Math.abs(gBest));
         Run.log("Total iteracoes: "+totalIterations);
         Run.log("--------------------------------------------");
         

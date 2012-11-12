@@ -15,19 +15,25 @@ public class PopulationAnalyzer
     {
         Run.log("CROMOSSOMO\t\tVALORES DECODIFICADOS\t\tF(X)");
 
+        
+        StringBuffer sb2 = new StringBuffer();
         for (Chromosome i : population)
         {
+        	StringBuffer sb = new StringBuffer();
             List<Double> vals = d.decode(i);
 
-            StringBuffer sb = new StringBuffer();
+            
             sb.append("{ ");
             for (Double j : vals)
                 sb.append(String.format("%f ", j));
             sb.append("}");
 
-            Run.log(String.format("%s\t%s\t%f",
-                        i.toString(), sb.toString(), f.calculate(vals)));
+            sb2.append(String.format("%s \t %s \t %f",
+                i.toString(), sb.toString(), Math.abs(f.calculate(vals))));
+            sb2.append("\n");
+            
         }
+        Run.log(sb2.toString());
     }
 
     public static double avgFitness(List<Chromosome> population,
