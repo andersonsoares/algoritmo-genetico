@@ -168,10 +168,10 @@ public class Run {
 		mediaMelhorResultado /= nrExecucoes;
 		mediaTempoDecorrido  /= nrExecucoes;
 		
-		System.out.println("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido));
-		System.out.println("Media de resultado: "+mediaMelhorResultado);
-		log("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido));
-		log("Media de resultaod: "+mediaMelhorResultado);
+		System.out.println("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido)+" ( "+mediaTempoDecorrido+" ms )");
+		System.out.println("Media de resultado: "+Math.abs(mediaMelhorResultado));
+		log("Media de tempo: "+ImprimirTempo.print(mediaTempoDecorrido)+" ( "+mediaTempoDecorrido+" ms )");
+		log("Media de resultaod: "+Math.abs(mediaMelhorResultado));
 	}
 	
 	
